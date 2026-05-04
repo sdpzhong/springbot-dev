@@ -32,7 +32,8 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,channel_id,uid
+        id
+        ,channel_id,uid
         title,subtitle,
         content,cover,read_count,
         keywords,status,submit_time,
@@ -40,7 +41,7 @@
         deleted,
     </sql>
 
-    <!--  获取文章分页 联表查询获取作者信息  -->
+    <!--  获取文章分页 -->
     <select id="queryArticlePage" resultMap="BaseResultMap">
         select ta.id,
                ta.channel_id,
@@ -63,7 +64,8 @@
                tu.email
         from t_article as ta,
              t_user as tu
-        where ta.deleted = 0
+        order by desc
+        where ta.deleted = 0;
     </select>
 
 </mapper>

@@ -28,7 +28,7 @@ public class UserSimplePo implements Serializable {
      */
     @ApiModelProperty("用户名")
     @TableField(value = "username")
-    private String username;
+    private String username = "";
 
     /**
      * 性别 0-男 ｜ 1-女 ｜ 2-未知
@@ -42,12 +42,12 @@ public class UserSimplePo implements Serializable {
      */
     @ApiModelProperty("简介")
     @TableField(value = "sign")
-    private String sign;
+    private String sign = "";
 
     /**
      * 邮箱
      */
     @ApiModelProperty("邮箱")
     @TableField(value = "email")
-    private String email;
+    private String email = "";
 }

@@ -5,9 +5,10 @@
 <mapper namespace="com.sdpzhong.dev.mapper.UserMapper">
 
     <resultMap id="BaseResultMap" type="com.sdpzhong.dev.entity.po.User">
-        <id property="uid" column="uid" jdbcType="VARCHAR"/>
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="uid" column="uid" jdbcType="VARCHAR"/>
         <result property="username" column="username" jdbcType="VARCHAR"/>
-        <result property="nickName" column="nick_name" jdbcType="VARCHAR"/>
+        <result property="nickname" column="nickname" jdbcType="VARCHAR"/>
         <result property="password" column="password" jdbcType="VARCHAR"/>
         <result property="passwordSalt" column="password_salt" jdbcType="VARCHAR"/>
         <result property="status" column="status" jdbcType="INTEGER"/>
@@ -24,11 +25,13 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        uid, username, nick_name,
-        password, password_salt, status, gender,
-        avatar, bio, sign,
-        email, mobile, birthday,
-        create_time, update_time, deleted
+                id,
+                uid
+            , username, nickname,
+                password, password_salt, status, gender,
+                avatar, bio, sign,
+                email, mobile, birthday,
+                create_time, update_time, deleted
     </sql>
 
     <!--  查询用户信息 -->

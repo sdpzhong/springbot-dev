@@ -34,7 +34,7 @@ public class UserController {
     }
 
     @ApiOperation("获取用户信息")
-    @GetMapping("/getUserInfo")
+    @GetMapping("/info")
     public User getUserInfo() {
         return userService.getUserInfo();
     }

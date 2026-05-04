@@ -33,7 +33,8 @@ public class ScheduledTasks {
     /**
      * 定时更新文章状态
      */
-    @Scheduled(cron = "* */1 * * * ?")
+//    @Scheduled(cron = "1 1/1 * * * ?")
+    @Scheduled(fixedRate = 30 * 1000)
     public void autoRefreshArticleStatusTask() {
         articleService.refreshArticlePendingPublishStatusRecords();
     }

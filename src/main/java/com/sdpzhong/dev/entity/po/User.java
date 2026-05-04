@@ -21,11 +21,19 @@ import java.util.Date;
 @ApiModel("UserModel")
 @Accessors(chain = true)
 public class User implements Serializable {
+
     /**
      * 用户编号
      */
     @ApiModelProperty("用户编号")
-    @TableId(value = "uid", type = IdType.ASSIGN_UUID)
+    @TableId(value = "id", type = IdType.AUTO)
+    private Long id;
+
+    /**
+     * 用户编号
+     */
+    @ApiModelProperty("uid")
+    @TableField(value = "uid", fill = FieldFill.INSERT)
     private String uid;
 
     /**
@@ -39,8 +47,8 @@ public class User implements Serializable {
      * 昵称
      */
     @ApiModelProperty("昵称")
-    @TableField(value = "nick_name")
-    private String nickName;
+    @TableField(value = "nickname")
+    private String nickname = "";
 
     /**
      * 密码
@@ -77,35 +85,35 @@ public class User implements Serializable {
      */
     @ApiModelProperty("头像")
     @TableField(value = "avatar")
-    private String avatar;
+    private String avatar = "";
 
     /**
      * 简介
      */
     @ApiModelProperty("简介")
     @TableField(value = "bio")
-    private String bio;
+    private String bio = "";
 
     /**
      * 签名
      */
     @ApiModelProperty("签名")
     @TableField(value = "sign")
-    private String sign;
+    private String sign = "";
 
     /**
      * 邮箱
      */
     @ApiModelProperty("邮箱")
     @TableField(value = "email")
-    private String email;
+    private String email = "";
 
     /**
      * 手机号
      */
     @ApiModelProperty("手机号")
     @TableField(value = "mobile")
-    private String mobile;
+    private String mobile = "";
 
     /**
      * 出生年月

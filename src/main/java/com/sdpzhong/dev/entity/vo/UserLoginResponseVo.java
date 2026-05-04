@@ -1,20 +1,24 @@
 package com.sdpzhong.dev.entity.vo;
 
-import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-import java.io.Serializable;
-
 @Data
 @Accessors(chain = true)
-@Schema(name = "UserLoginResponseVo")
-public class UserLoginResponseVo implements Serializable {
+@ApiModel(value = "UserLoginResponseVo")
+public class UserLoginResponseVo {
 
-    @Schema(name = "登录凭证")
+    @ApiModelProperty(value = "schema")
+    private String schema = "Bearer";
+
+    @ApiModelProperty(value = "登录凭证")
     private String token;
 
-    @Schema(name = " 剩余有效期（秒）")
+    @ApiModelProperty(value = " 剩余有效期（秒）")
     private long timeout;
 
+    @ApiModelProperty(value = "过期时间")
+    private long expires;
 }

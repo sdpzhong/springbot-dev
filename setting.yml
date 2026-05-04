@@ -1,4 +1,3 @@
-# 配置项备份文件
 server:
   port: 9377
 
@@ -7,10 +6,6 @@ spring:
     name: dev-service
   mvc:
     throw-exception-if-no-handler-found: true
-    favicon:
-      enabled: false
-    pathmatch:
-      matching-strategy: ant_path_matcher
   web:
     resources:
       add-mappings: false
@@ -18,7 +13,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/dev_db?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
     username: root
-    password: 1902608505
+    password: root
     hikari:
       #设置事务自动提交
       auto-commit: true
@@ -68,15 +63,15 @@ sa-token:
   timeout: 2592000
   # token 最低活跃频率（单位：秒），如果 token 超过此时间没有访问系统就会被冻结，默认-1 代表不限制，永不冻结
   active-timeout: -1
-  # 是否允许同一账号多地同时登录 （为 true 时允许一起登录, 为 false 时新登录挤掉旧登录）该属性依赖于is-share=true
-  is-concurrent: false
+  # 是否允许同一账号多地同时登录 （为 true 时允许一起登录, 为 false 时新登录挤掉旧登录）
+  is-concurrent: true
   # 在多人登录同一账号时，是否共用一个 token （为 true 时所有登录共用一个 token, 为 false 时每次登录新建一个 token）
   is-share: true
   # token 风格（默认可取值：uuid、simple-uuid、random-32、random-64、random-128、tik）
   token-style: uuid
   # 是否输出操作日志
   is-log: true
-  # token 前缀
+  # token 前缀 (已经在 HttpRequestFilter 请求过滤器中兼容处理)
   # token-prefix: Bearer
   # 是否尝试从cookie中获取token
   isReadCookie: false

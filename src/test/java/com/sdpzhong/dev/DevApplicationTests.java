@@ -5,6 +5,7 @@ import com.sdpzhong.dev.entity.po.Article;
 import com.sdpzhong.dev.entity.po.User;
 import com.sdpzhong.dev.mapper.ArticleMapper;
 import com.sdpzhong.dev.mapper.UserMapper;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -35,29 +36,31 @@ class DevApplicationTests {
     private ObjectMapper objectMapper;
 
     @Test
-    public void contextLoads() throws SQLException {
+    void contextLoads() throws SQLException {
         System.out.println("获取的数据库连接为:" + dataSource.getConnection());
     }
 
     @Test
-    public void deleteUser() {
+    void deleteUser() {
         int result = userMapper.deleteById("2c4c769d703effd5b94cf6bffe35178d");
-
         System.out.println(result);
+        Assertions.assertEquals(1, result);
     }
 
     @Test
-    public void queryUser() {
+    void queryUser() {
         User result = userMapper.selectById("2c4c769d703effd5b94cf6bffe35178d");
-
         System.out.println(result);
+        Assertions.assertNull(result);
     }
 
     /**
-     * 批量生成文章数据
+     * 批量生成文章数据<br/>
+     * 测试方法使用 @Transactional 注解，方法调用结束后会自动回滚，数据不入库
      */
     @Test
-    public void createdArticleData() throws IOException {
+    // @Transactional
+    void createdArticleData() throws IOException {
         List<Article> articles = new ArrayList<>();
         // String jsonStr = new String(Files.readAllBytes(Paths.get("src/test/java/com/sdpzhong/dev/articles.json")));
         List<Map<String, Object>> jsonList = objectMapper.readValue(new File("src/test/java/com/sdpzhong/dev/articles.json"),
@@ -71,13 +74,14 @@ class DevApplicationTests {
             article.setSubtitle((String) json.get("hot"));
             article.setContent((String) json.get("desc"));
             article.setSubmitTime(new Date());
-            article.setUid("b7e8b6a0fc38822aeaa063583159a33b");
-
+            article.setUid("fb433e6204e64692ba66c71e9c9e96b2");
             articles.add(article);
         }
 
         // articles.forEach(System.out::println);
         articles.forEach(articleMapper::insert);
+
+        Assertions.assertEquals(jsonList.size(), articles.size());
     }
 }
 

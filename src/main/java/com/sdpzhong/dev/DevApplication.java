@@ -37,9 +37,10 @@ public class DevApplication {
         SpringApplication app = new SpringApplication(DevApplication.class);
         Environment environment = app.run(args).getEnvironment();
 
+        log.info("Application started successfully!!");
         log.info("Address: http://127.0.0.1:{}", environment.getProperty("server.port"));
-
-        System.out.println("Application started successfully!!");
+        log.info("Api doc address: http://127.0.0.1:{}/swagger-ui/index.html", environment.getProperty("server.port"));
+        log.info("nacos address: http://127.0.0.1:8080");
     }
 
 }

@@ -1,7 +1,7 @@
 package com.sdpzhong.dev.controller;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.sdpzhong.dev.entity.dto.IPageDto;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.sdpzhong.dev.entity.dto.page.IPageDto;
 import com.sdpzhong.dev.entity.po.Article;
 import com.sdpzhong.dev.service.ArticleService;
 import io.swagger.annotations.Api;
@@ -30,9 +30,9 @@ public class ArticleController {
 
     /* 获取文章分页数据 */
     @GetMapping("/page")
-    @ApiOperation("获取文章分页数据")
-    public IPage<Article> page(@Parameter(name = "IPageDto") IPageDto dto) {
-        return articleService.getArticlePage(dto.current, dto.size);
+    @ApiOperation("获取当前用户所有文章分页数据")
+    public Page<Article> page(@Parameter(name = "IPageDto") IPageDto dto) {
+        return articleService.getArticlePage(dto);
     }
 
 

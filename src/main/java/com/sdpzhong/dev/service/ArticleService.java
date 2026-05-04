@@ -1,7 +1,8 @@
 package com.sdpzhong.dev.service;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.sdpzhong.dev.entity.dto.page.IPageDto;
 import com.sdpzhong.dev.entity.po.Article;
 
 /**
@@ -15,11 +16,30 @@ public interface ArticleService extends IService<Article> {
     /**
      * 获取文章分页
      *
-     * @param pageNum
-     * @param pageSize
+     * @param dto
      * @return
      */
-    IPage<Article> getArticlePage(int pageNum, int pageSize);
+    Page<Article> getArticlePage(IPageDto dto);
+
+    /**
+     * 获取文章分页数据，开发接口
+     *
+     * @param dto
+     * @return
+     */
+    Page<Article> getArticlePublicPage(IPageDto dto);
+
+
+    /* 发布文章 */
+    /*    Boolean publishArticle();*/
+
+
+    /* 变更文章状态 */
+
+    /* 修改文章 */
+
+    /* 删除文章 */
+
 
     /**
      * 自动更新定时发布状态的文章为发布态

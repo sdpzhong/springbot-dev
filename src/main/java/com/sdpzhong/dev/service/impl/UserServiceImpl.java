@@ -1,5 +1,6 @@
 package com.sdpzhong.dev.service.impl;
 
+import cn.dev33.satoken.session.SaSession;
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -19,7 +20,6 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.io.Serializable;
 import java.util.Base64;
 
 /**
@@ -62,10 +62,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         StpUtil.login(user.getUid());
 
         SaTokenInfo tokenInfo = StpUtil.getTokenInfo();
+        SaSession session = StpUtil.getSession();
 
         return new UserLoginResponseVo()
                 .setToken(tokenInfo.tokenValue)
-                .setTimeout(tokenInfo.tokenTimeout);
+                .setTimeout(tokenInfo.tokenTimeout)
+                .setExpires(session.getCreateTime() + tokenInfo.tokenTimeout * 1000);
     }
 
     @Override
@@ -99,8 +101,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public User getUserInfo() {
         // 通过token查询出用户id
         Object userId = StpUtil.getLoginId();
-
-        User user = getById((Serializable) userId);
+        LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(User::getUid, userId);
+        User user = getOne(queryWrapper);
 
         if (user == null) {
             throw new BusinessException(HttpReturnCode.RC_NO_REGISTERED);

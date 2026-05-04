@@ -1,24 +1,23 @@
 package com.sdpzhong.dev.entity.vo;
 
-import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-import java.io.Serializable;
-
 @Data
 @Accessors(chain = true)
-@Schema(name = "UserInfoVo")
-public class UserInfoVo implements Serializable {
-    @Schema(description = "用户名")
+@ApiModel(value = "用户基本信息")
+public class UserInfoVo {
+    @ApiModelProperty(value = "用户名")
     private String username;
 
-    @Schema(description = "UID")
+    @ApiModelProperty(value = "UID")
     private String uid;
 
-    @Schema(description = "性别")
+    @ApiModelProperty(value = "性别")
     private Integer gender;
 
-    @Schema(description = "手机号")
+    @ApiModelProperty(value = "手机号")
     private String mobile;
 }
